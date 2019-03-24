@@ -4,18 +4,28 @@
     <meta charset="UTF-8">
     <title>Example - example-guide-concepts-1-production</title>
     <script src="http://code.angularjs.org/1.7.8/angular.min.js"></script>
+    <script src="invoice1.js"></script>
 </head>
 <body>
-    <div ng-app ng-init="qty=4;cost=3">
+    <div ng-app="invoice1" ng-controller="InvoiceController as invoice" >
         <b>Invoice:</b>
         <div>
-            Quantity: <input type="number" min="0" ng-model="qty">
+            Quantity: <input type="number" min="0" ng-model="invoice.qty">
         </div>
         <div>
-            Costs: <input type="number" min="0" ng-model="cost">
+            Costs: <input type="number" min="0" ng-model="invoice.cost">
+            <select ng-model="invoice.inCurr">
+                <option ng-repeat="c in invoice.currencies">{{c}}</option>
+            </select>
         </div>
         <div>
-            <b>Total:</b> {{qty * cost | currency}}
+            <b>Total:</b>
+            <span ng-repeat="c in invoice.currencies">
+                {{invoice.total(c) | currency:c}}
+            </span>
+            <br />
+            <button class="btn" ng-click="invoice.pay()">Pay</button> 
+
         </div>
     </div>
 </body>
