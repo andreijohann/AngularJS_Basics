@@ -2,29 +2,30 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Example - example-guide-concepts-1-production</title>
+    <title>Example - Controller using a Service</title>
     <script src="http://code.angularjs.org/1.7.8/angular.min.js"></script>
-    <script src="invoice1.js"></script>
+    <script src="financialModule.js"></script>
+    <script src="invoiceController.js"></script>
 </head>
 <body>
-    <div ng-app="invoice1" ng-controller="InvoiceController as invoice" >
-        <b>Invoice:</b>
+    <div ng-app="invoice" ng-controller="InvoiceController as inv" >
+        <b>Invoice Module:</b>
         <div>
-            Quantity: <input type="number" min="0" ng-model="invoice.qty">
+            Quantity: <input type="number" min="0" ng-model="inv.qty">
         </div>
         <div>
-            Costs: <input type="number" min="0" ng-model="invoice.cost">
-            <select ng-model="invoice.inCurr">
-                <option ng-repeat="c in invoice.currencies">{{c}}</option>
+            Costs: <input type="number" min="0" ng-model="inv.cost">
+            <select ng-model="inv.inCurr">
+                <option ng-repeat="c in inv.currencies">{{c}}</option>
             </select>
         </div>
         <div>
             <b>Total:</b>
-            <span ng-repeat="c in invoice.currencies">
-                {{invoice.total(c) | currency:c}}
+            <span ng-repeat="c in inv.currencies">
+                {{inv.total(c) | currency:c}}
             </span>
             <br />
-            <button class="btn" ng-click="invoice.pay()">Pay</button> 
+            <button class="btn" ng-click="inv.pay()">Pay</button> 
 
         </div>
     </div>
